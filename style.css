@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which Fry Cook Are You?</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%; /* Ensure full screen height */
+            width: 100%;  /* Ensure full screen width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        /* Container that will hold content */
+        .container {
+            width: 100%;
+            max-width: 480px;  /* Max width for mobile phones */
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* Buttons styles */
+        button {
+            margin: 10px 0;
+            padding: 15px;
+            font-size: 1.2em;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Image styles */
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: none;  /* All images hidden by default */
+        }
+
+        /* Styling for sections or images */
+        section {
+            display: none;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        /* Fullscreen height for mobile devices */
+        .fullscreen-container {
+            height: 100vh;  /* Take up the full height of the screen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertically center content */
+            align-items: center;
+        }
+
+        /* For larger screens (for desktop) */
+        @media (min-width: 601px) {
+            .container {
+                width: 50%;
+                padding: 40px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            button {
+                font-size: 1.5em;
+                padding: 20px;
+            }
+        }
+
+        /* Mobile specific styling */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 12px;
+            }
+
+            /* Ensuring images adjust to fit mobile screen */
+            img {
+                display: block; /* Show images only when required */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main container with full screen height for mobile -->
+    <div class="fullscreen-container">
+        <div class="container">
+            <h1>Which Fry Cook Are You?</h1>
+
+            <!-- Initial buttons -->
+            <button class="NonchalantButton">Nonchalant</button>
+            <button class="JokeyButton">Jokey</button>
+
+            <!-- Nonchalant options -->
+            <button class="ChillButton">Chill</button>
+            <button class="HateButton">Hate</button>
+
+            <!-- Jokey options -->
+            <button class="LazyAndBoringButton">Lazy and Boring</button>
+            <button class="FunAndEnergeticButton">Fun and Energetic</button>
+
+            <!-- Images to display -->
+            <img class="Spongebobimg" src="spongebob.jpg" alt="Spongebob">
+            <img class="Patrickimg" src="patrick.jpg" alt="Patrick">
+            <img class="Squidwardimg" src="squidward.jpg" alt="Squidward">
+            <img class="Jimimg" src="jim.jpg" alt="Jim">
+            <img class="Chillimg" src="chill.jpg" alt="Chill">
+            <img class="Hateimg" src="hate.jpg" alt="Hate">
+            <img class="LazyAndBoringimg" src="lazyandboring.jpg" alt="Lazy and Boring">
+            <img class="FunAndEnergeticimg" src="funandenergetic.jpg" alt="Fun and Energetic">
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Link your JavaScript file -->
+
+</body>
+</html>
