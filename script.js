@@ -1,132 +1,65 @@
-console.log("Which Fry Cook are you");
+console.log("Which Fry Cook are you?");
 
-let NonchalantButton = document.querySelector(".NonchalantButton");
-let JokeyButton = document.querySelector(".JokeyButton");
-let SquidwardButton = document.querySelector(".SquidwardButton");
-let JimButton = document.querySelector(".JimButton");
-let SpongebobButton = document.querySelector(".SpongebobButton");
-let PatrickButton = document.querySelector(".PatrickButton");
+// Declare all the images as variables (for now, leave the image part blank and you will fill in the source later)
+const images = {
+    spongebob: "", // Declare the image path for Spongebob here
+    squidward: "", // Declare the image path for Squidward here
+    jim: ""        // Declare the image path for Jim here
+};
 
-let ChillButton = document.querySelector(".ChillButton");
-let HateButton = document.querySelector(".HateButton");
-let LazyAndBoringButton = document.querySelector(".LazyAndBoringButton");
-let FunAndEnergeticButton = document.querySelector(".FunAndEnergeticButton");
+// Get the input field and the second options
+let firstInput = document.querySelector("#firstInput");
+let secondOptions = document.querySelector("#secondOptions");
+let imageContainer = document.querySelector("#imageContainer");
 
-let Spongebobimg = document.querySelector(".Spongebobimg");
-let Patrickimg = document.querySelector(".Patrickimg");
-let Squidwardimg = document.querySelector(".Squidwardimg");
-let Jimimg = document.querySelector(".Jimimg");
+// Track the first choice (Nonchalant or Jokey)
+let firstChoice = '';
 
-let Chillimg = document.querySelector(".Chillimg");
-let Hateimg = document.querySelector(".Hateimg");
-let LazyAndBoringimg = document.querySelector(".LazyAndBoringimg");
-let FunAndEnergeticimg = document.querySelector(".FunAndEnergeticimg");
+// Function to display the images based on the second choice
+function displayImageBasedOnChoice(choice) {
+    imageContainer.innerHTML = ''; // Clear any previous images
 
-// Initially hide all buttons and images except the first two options
-SquidwardButton.style.display = "none";
-JimButton.style.display = "none";
-SpongebobButton.style.display = "none";
-PatrickButton.style.display = "none";
-ChillButton.style.display = "none";
-HateButton.style.display = "none";
-LazyAndBoringButton.style.display = "none";
-FunAndEnergeticButton.style.display = "none";
+    if (firstChoice === 'nonchalant') {
+        if (choice === 'lazyAndBoring') {
+            createImage(images.spongebob, 'Spongebob');
+        } else if (choice === 'chill') {
+            createImage(images.spongebob, 'Spongebob');
+        }
+    } else if (firstChoice === 'jokey') {
+        if (choice === 'lazyAndBoring') {
+            createImage(images.squidward, 'Squidward');
+        } else if (choice === 'chill') {
+            createImage(images.jim, 'Jim');
+        }
+    }
+}
 
-Spongebobimg.style.display = "none";
-Patrickimg.style.display = "none";
-Squidwardimg.style.display = "none";
-Jimimg.style.display = "none";
-Chillimg.style.display = "none";
-Hateimg.style.display = "none";
-LazyAndBoringimg.style.display = "none"; 
-FunAndEnergeticimg.style.display = "none"; 
+// Function to create and append an image
+function createImage(src, altText) {
+    let imgElement = document.createElement("img");
+    imgElement.src = src;
+    imgElement.alt = altText;
+    imageContainer.appendChild(imgElement);
+}
 
-// Initial Button Click Events
-NonchalantButton.addEventListener('click', function() {
-    console.log("Nonchalant Button Clicked");
-    
-    // Hide Nonchalant and Jokey Buttons after selection
-    NonchalantButton.style.display = "none";
-    JokeyButton.style.display = "none";
-    
-    // Show options for Nonchalant (Chill and Hate)
-    ChillButton.style.display = "block";
-    HateButton.style.display = "block";
-    
-    // Hide images of other characters
-    Spongebobimg.style.display = "none";
-    Patrickimg.style.display = "none";
-    Squidwardimg.style.display = "none";
-    Jimimg.style.display = "none";
-    
-    // Hide Lazy and Fun images until clicked
-    LazyAndBoringimg.style.display = "none"; 
-    FunAndEnergeticimg.style.display = "none"; 
+// Event listener for the first input (Nonchalant or Jokey)
+firstInput.addEventListener('input', function() {
+    let inputText = firstInput.value.toLowerCase().trim();
+
+    // If the input matches either 'nonchalant' or 'jokey', show the second options
+    if (inputText === 'nonchalant' || inputText === 'jokey') {
+        firstChoice = inputText;
+        secondOptions.style.display = 'block';  // Show the second options (Lazy and Boring, Chill)
+    } else {
+        secondOptions.style.display = 'none';  // Hide the second options if input doesn't match
+    }
 });
 
-
-JokeyButton.addEventListener('click', function() {
-    console.log("Jokey Button Clicked");
-
-    
-    NonchalantButton.style.display = "none";
-    JokeyButton.style.display = "none";
-    
-    
-    LazyAndBoringButton.style.display = "block";
-    FunAndEnergeticButton.style.display = "block";
-    
-    
-    Squidwardimg.style.display = "none";
-    Jimimg.style.display = "none";
-    
-    
-    LazyAndBoringimg.style.display = "none"; 
-    FunAndEnergeticimg.style.display = "none";
+// Event listeners for the second set of options (Lazy and Boring or Chill)
+document.querySelector(".lazyAndBoring").addEventListener('click', function() {
+    displayImageBasedOnChoice('lazyAndBoring');
+});
+document.querySelector(".chill").addEventListener('click', function() {
+    displayImageBasedOnChoice('chill');
 });
 
-
-ChillButton.addEventListener('click', function() {
-    console.log("Chill Button Clicked");
-    
-    Chillimg.style.display = "block";  
-    Hateimg.style.display = "none";   
-    Spongebobimg.style.display = "none";       
-    Patrickimg.style.display = "none";         
-    Squidwardimg.style.display = "none";       
-    Jimimg.style.display = "none";             
-});
-
-HateButton.addEventListener('click', function() {
-    console.log("Hate Button Clicked");
-   
-    Hateimg.style.display = "block";  
-    Chillimg.style.display = "none";   
-    Spongebobimg.style.display = "none";       
-    Patrickimg.style.display = "none";         
-    Squidwardimg.style.display = "none";       
-    Jimimg.style.display = "none";             
-});
-
-
-LazyAndBoringButton.addEventListener('click', function() {
-    console.log("Lazy and Boring Button Clicked");
-   
-    LazyAndBoringimg.style.display = "block";  
-    FunAndEnergeticimg.style.display = "none"; 
-    Spongebobimg.style.display = "none";       
-    Patrickimg.style.display = "none";         
-    Squidwardimg.style.display = "none";       
-    Jimimg.style.display = "none";             
-});
-
-FunAndEnergeticButton.addEventListener('click', function() {
-    console.log("Fun and Energetic Button Clicked");
-    
-    FunAndEnergeticimg.style.display = "block";  
-    LazyAndBoringimg.style.display = "none";
-    Spongebobimg.style.display = "none";         
-    Patrickimg.style.display = "none";           
-    Squidwardimg.style.display = "none";         
-    Jimimg.style.display = "none";               
-});

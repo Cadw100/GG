@@ -4,43 +4,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Which Fry Cook Are You?</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%; /* Ensure full screen height */
+            width: 100%;  /* Ensure full screen width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        /* Container that will hold content */
+        .container {
+            width: 100%;
+            max-width: 480px;  /* Max width for mobile phones */
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input field styles */
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1.2em;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Button styles */
+        button {
+            margin: 10px 0;
+            padding: 15px;
+            font-size: 1.2em;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Image styles */
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: none;  /* Initially hide images */
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Fullscreen height for mobile devices */
+        .fullscreen-container {
+            height: 100vh;  /* Take up the full height of the screen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertically center content */
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* For larger screens (for desktop) */
+        @media (min-width: 601px) {
+            .container {
+                width: 50%;
+                padding: 40px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            input, button {
+                font-size: 1.5em;
+                padding: 20px;
+            }
+        }
+
+        /* Mobile specific styling */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            input, button {
+                font-size: 1em;
+                padding: 12px;
+            }
+
+            /* Ensuring images adjust to fit mobile screen */
+            img {
+                display: block; /* Show images only when required */
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Which Fry Cook Are You?</h1>
 
-   
-    <input placeholder="Nonchalant" class="Nonchalant">
-    <input placeholder="Jokey" class="Jokey">
-    <input placeholder="Squidward" class="Squidward">
-    <input placeholder="Jim" class="Jim">
-    <input placeholder="Spongebob" class="Spongebob">
-    <input placeholder="Patrick" class="Patrick">
+    <!-- Main container with full screen height for mobile -->
+    <div class="fullscreen-container">
+        <div class="container">
+            <h1>Which Fry Cook Are You?</h1>
 
-    
-    <button class="NonchalantButton">Nonchalant</button>
-    <button class="JokeyButton">Jokey</button>
-    <button class="SquidwardButton">Squidward</button>
-    <button class="JimButton">Jim</button>
-    <button class="SpongebobButton">Spongebob</button>
-    <button class="PatrickButton">Patrick</button>
+            <!-- First set of input options -->
+            <input type="text" id="firstInput" placeholder="Type 'Nonchalant' or 'Jokey'">
 
-   
-    <button class="ChillButton" style="display:none;">Chill</button>
-    <button class="HateButton" style="display:none;">Hate</button>
-    <button class="LazyAndBoringButton" style="display:none;">Lazy and Boring</button>
-    <button class="FunAndEnergeticButton" style="display:none;">Fun and Energetic</button>
+            <!-- Second set of options (will appear after the first choice) -->
+            <div id="secondOptions" style="display: none;">
+                <button class="lazyAndBoring">Lazy and Boring</button>
+                <button class="chill">Chill</button>
+            </div>
 
-    
-    <img class="Spongebobimg" src="Spongeboob.jpg" style="display:none;">
-    <img class="Patrickimg" src="Pat.jpg" style="display:none;">
-    <img class="Squidwardimg" src="Squidward.jpg" style="display:none;">
-    <img class="Jimimg" src="Jim the cook.jpg" style="display:none;">
-    <img class="Chillimg" src="Squidward.jpg" style="display:none;">
-    <img class="Hateimg" src="Jim the cook.jfif" style="display:none;">
-    <img class="LazyAndBoringimg" src="Pat.jpg" style="display:none;">
-    <img class="FunAndEnergeticimg" src="Spongeboob.jpg" style="display:none;">
+            <!-- Image Container (Images will be shown here after selecting the second option) -->
+            <div id="imageContainer"></div>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        console.log("Which Fry Cook are you?");
+
+        // Declare all the images as variables (for now, leave the image part blank and you will fill in the source later)
+        const images = {
+            img: "spongeboob.jpg", // Example image path for Spongebob
+            squidward: "squidward.jpg", // Example image path for Squidward
+            jim: "jim.jpg"              // Example image path for Jim
+        };
+
+        // Get the input field and the second options
+        let firstInput = document.querySelector("#firstInput");
+        let secondOptions = document.querySelector("#secondOptions");
+        let imageContainer = document.querySelector("#imageContainer");
+
+        // Track the first choice (Nonchalant or Jokey)
+        let firstChoice = '';
+
+        // Function to display the images based on the second choice
+        function displayImageBasedOnChoice(choice) {
+            imageContainer.innerHTML = ''; // Clear any previous images
+
+
+          
+            if (firstChoice === 'nonchalant') {
+                if (choice === 'lazyAndBoring') {
+                    createImage(images.squiadward, 'Spongeboob');
+                } else if (choice === 'chill') {
+                    createImage(images.spongebob, 'Spongebob');
+                }
+            } else if (firstChoice === 'jokey') {
+                if (choice === 'lazyAndBoring') {
+                    createImage(images.squidward, 'Squidward');
+                } else if (choice === 'chill') {
+                    createImage(images.jim, 'Jim');
+                }
+            }
+        }
+
+        // Function to create and append an image
+        function createImage(src, altText) {
+            let imgElement = document.createElement("img");
+            imgElement.src = src;
+            imgElement.alt = altText;
+            imgElement.style.display = "block"; // Make the image visible
+            imageContainer.appendChild(imgElement);
+        }
+
+        // Event listener for the first input (Nonchalant or Jokey)
+        firstInput.addEventListener('input', function() {
+            let inputText = firstInput.value.toLowerCase().trim();
+
+            // If the input matches either 'nonchalant' or 'jokey', show the second options
+            if (inputText === 'nonchalant' || inputText === 'jokey') {
+                firstChoice = inputText;
+                secondOptions.style.display = 'block';  // Show the second options (Lazy and Boring, Chill)
+            } else {
+                secondOptions.style.display = 'none';  // Hide the second options if input doesn't match
+            }
+        });
+
+        // Event listeners for the second set of options (Lazy and Boring or Chill)
+        document.querySelector(".lazyAndBoring").addEventListener('click', function() {
+            displayImageBasedOnChoice('lazyAndBoring');
+        });
+        document.querySelector(".chill").addEventListener('click', function() {
+            displayImageBasedOnChoice('chill');
+        });
+    </script>
+
 </body>
 </html>
